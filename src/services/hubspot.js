@@ -1,3 +1,10 @@
+// Form submissions flow to HubSpot CRM.
+// HubSpot dashboard is configured to forward all
+// notification emails to mbatunursing@gmail.com
+// This Gmail address is NEVER displayed on the website.
+// To update the notification email, log into HubSpot →
+// Marketing → Forms → [form] → Options → Notifications.
+
 const HUBSPOT_PORTAL_ID = import.meta.env.VITE_HUBSPOT_PORTAL_ID;
 const HUBSPOT_FORM_ID = import.meta.env.VITE_HUBSPOT_FORM_ID;
 

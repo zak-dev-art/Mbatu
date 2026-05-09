@@ -86,8 +86,18 @@ const Contact = () => {
                           <span className="text-2xl mr-2">📘</span>
                           <span className="font-medium">Facebook</span>
                         </a>
-                        <a href="#" className="text-gray-600 hover:text-mcn-primary transition-colors flex items-center">
-                          <img src="/image/Insta.webp" alt="Instagram" className="w-6 h-6 mr-2" onError={(e) => { e.target.style.display = 'none' }} />
+                        <a
+                          href="https://www.instagram.com/mbatu_care_nursing_/?hl=en"
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="MCN Instagram"
+                          className="text-gray-600 hover:text-mcn-primary transition-colors flex items-center"
+                        >
+                          <img
+                            src="/image/social/Insta.webp"
+                            alt="Instagram"
+                            className="h-6 w-6 object-contain hover:opacity-75 transition-opacity duration-200 mr-2"
+                          />
                           <span className="font-medium">Instagram</span>
                         </a>
                       </div>

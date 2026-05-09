@@ -3,13 +3,21 @@ import { Link } from 'react-router-dom';
 const HeroSection = () => {
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center 
-      bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/image/nursing.webp')" }}
+      className="relative min-h-screen flex items-center justify-center hero-section"
+      style={{
+        backgroundImage: "url('/image/hero/depositphotos_689087790-stock-photo-nursing-assistant-helping-elderly-man.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'scroll',
+        minHeight: '100vh',
+        width: '100%',
+      }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r 
-        from-mcn-dark/80 via-mcn-dark/60 to-transparent" />
-
+      <div 
+        className="absolute inset-0" 
+        style={{ background: 'linear-gradient(to right, rgba(13,43,78,0.75) 40%, rgba(13,43,78,0.35) 100%)' }} 
+      />
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           Compassionate Community Nursing & Disability Support

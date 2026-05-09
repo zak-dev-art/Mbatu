@@ -103,7 +103,7 @@ const About = () => {
             We acknowledge the Traditional Custodians of the land on which we work, the Ngunnawal people of the ACT and the various Aboriginal and Torres Strait Islander peoples across NSW. We pay our respects to Elders past, present, and emerging.
           </p>
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl inline-block">
-            <img src="/image/logo_Transparent_NoBuffer 2.png" alt="MCN Logo" className="mx-auto h-20" onError={(e) => { e.target.style.display = 'none' }} />
+            <img src="/image/logos/logo_Transparent_NoBuffer 2.png" alt="MCN Logo" className="mx-auto h-20" onError={(e) => { e.target.style.display = 'none' }} />
           </div>
         </div>
       </section>

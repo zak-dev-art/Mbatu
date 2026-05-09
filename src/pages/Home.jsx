@@ -131,19 +131,19 @@ const Home = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <img src="/image/PHOTO-2026-03-25-18-40-16.jpg" alt="Care photo 1" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
+              <img src="/image/team/PHOTO-2026-03-25-18-40-16.jpg" alt="Care photo 1" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <img src="/image/PHOTO-2026-03-25-18-46-21.jpg" alt="Care photo 2" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
+              <img src="/image/team/PHOTO-2026-03-25-18-46-21.jpg" alt="Care photo 2" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <img src="/image/PHOTO-2026-03-25-19-07-05.jpg" alt="Care photo 3" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
+              <img src="/image/team/PHOTO-2026-03-25-19-07-05.jpg" alt="Care photo 3" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <img src="/image/Picture1.png" alt="Care photo 4" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
+              <img src="/image/team/Picture1.png" alt="Care photo 4" className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onError={(e) => { e.target.style.display = 'none' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           </div>
@@ -155,7 +155,7 @@ const Home = () => {
         <div className="max-w-4xl mx-auto px-6 md:px-16 lg:px-24 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-mcn-dark mb-8">NDIS Registered Provider</h2>
           <div className="bg-gradient-to-br from-mcn-light to-white p-8 rounded-2xl shadow-lg border border-mcn-primary/10 inline-block">
-            <img src="/image/NDIS.jfif" alt="NDIS Registered Provider" className="mx-auto h-32 mb-6" onError={(e) => { e.target.style.display = 'none' }} />
+            <img src="/image/badges/NDIS.jfif" alt="NDIS Registered Provider" className="mx-auto h-32 mb-6" onError={(e) => { e.target.style.display = 'none' }} />
             <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
               We are proud to be a registered NDIS provider, committed to delivering high-quality disability and community care services.
             </p>
