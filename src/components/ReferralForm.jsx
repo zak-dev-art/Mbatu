@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { submitToHubSpot } from '../services/hubspot';
+import { submitReferral } from '../services/hubspot';
 
 const ReferralForm = ({ type }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      await submitToHubSpot(data);
+      await submitReferral(data);
       alert(`${type} referral submitted successfully!`);
       reset();
     } catch (error) {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { submitCareers } from '../services/hubspot';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -12,6 +13,9 @@ const Careers = () => {
 
   const [selectedJob, setSelectedJob] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const applicationForm = useForm();
 
   const [careersRef, careersInView] = useInView();
@@ -38,11 +42,30 @@ const Careers = () => {
   ];
 
   const onApplicationSubmit = async (data) => {
-    // Handle application submission
-    console.log('Application submitted:', data);
-    setShowModal(false);
-    applicationForm.reset();
-    alert('Application submitted successfully!');
+    setIsSubmitting(true);
+    setSubmitError('');
+    setSubmitSuccess(false);
+
+    try {
+      await submitCareers({
+        firstname: data.firstname || data.fullName?.split(' ')[0] || '',
+        lastname: data.lastname || data.fullName?.split(' ')[1] || '',
+        email: data.email || '',
+        phone: data.phone || '',
+        role: data.role || selectedJob?.title || '',
+        cover_letter: data.coverLetter || '',
+      });
+      setSubmitSuccess(true);
+      setShowModal(false);
+      applicationForm.reset();
+    } catch (error) {
+      console.error('Careers form error:', error);
+      setSubmitError(
+        'Application failed to send. Please try again or email us directly.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

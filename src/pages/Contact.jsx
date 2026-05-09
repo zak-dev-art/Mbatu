@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
-import { submitToHubSpot } from '../services/hubspot';
+import { submitContact } from '../services/hubspot';
 import useInView from '../hooks/useInView';
 
 const Contact = () => {
@@ -11,18 +11,35 @@ const Contact = () => {
     document.title = 'Contact Us - Mbatu Care Nursing';
   }, []);
 
-  const [submitStatus, setSubmitStatus] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const contactForm = useForm();
 
   const [contactRef, contactInView] = useInView();
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    setSubmitError('');
+    setSubmitSuccess(false);
+
     try {
-      await submitToHubSpot(data);
-      setSubmitStatus({ type: 'success', message: 'Message sent successfully!' });
+      await submitContact({
+        firstname: data.name?.split(' ')[0] || data.firstname || '',
+        lastname: data.name?.split(' ')[1] || data.lastname || '',
+        email: data.email || '',
+        phone: data.phone || '',
+        message: data.message || '',
+      });
+      setSubmitSuccess(true);
       contactForm.reset();
     } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      console.error('Contact form error:', error);
+      setSubmitError(
+        'Message failed to send. Please try again or reach us on WhatsApp.'
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -173,19 +190,49 @@ const Contact = () => {
                   />
                 </div>
 
+                {submitSuccess && (
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-start gap-3">
+                    <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                      <p className="text-green-800 font-semibold text-sm">Message sent successfully!</p>
+                      <p className="text-green-700 text-sm mt-1">Thank you. We'll get back to you as soon as possible.</p>
+                    </div>
+                  </div>
+                )}
+
+                {submitError && (
+                  <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
+                    <svg className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    <p className="text-red-700 text-sm">{submitError}</p>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-mcn-primary to-mcn-secondary text-white py-4 px-6 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  disabled={isSubmitting}
+                  className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-200 ${
+                    isSubmitting
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-mcn-primary to-mcn-secondary text-white hover:shadow-lg transition-all duration-300 hover:-translate-y-1'
+                  }`}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
               </form>
-
-              {submitStatus && (
-                <div className={`mt-6 p-4 rounded-xl ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
-                  {submitStatus.message}
-                </div>
-              )}
             </div>
           </div>
         </div>

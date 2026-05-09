@@ -1,12 +1,18 @@
 import { useForm } from 'react-hook-form';
-import { submitToHubSpot } from '../services/hubspot';
+import { submitContact } from '../services/hubspot';
 
 const ContactForm = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      await submitToHubSpot(data);
+      await submitContact({
+        firstname: data.name?.split(' ')[0] || '',
+        lastname: data.name?.split(' ')[1] || '',
+        email: data.email || '',
+        phone: data.phone || '',
+        message: data.message || '',
+      });
       alert('Message sent successfully!');
       reset();
     } catch (error) {
