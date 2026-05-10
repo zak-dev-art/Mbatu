@@ -28,7 +28,7 @@ const Footer = () => {
                 Instagram
               </a>
               <a
-                href="https://wa.me/61XXXXXXXXX"
+                href="https://wa.me/61412025261"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Chat with MCN on WhatsApp"
