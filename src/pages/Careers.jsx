@@ -23,19 +23,19 @@ const Careers = () => {
   const jobs = [
     {
       title: 'Registered Nurse',
-      type: 'Full-time',
+      types: ['Full-time', 'Part-time', 'Casual'],
       location: 'ACT/NSW',
       description: 'Provide high-quality nursing care to clients in community settings. Experience in community nursing preferred.',
     },
     {
       title: 'Disability Support Worker',
-      type: 'Part-time',
+      types: ['Full-time', 'Part-time', 'Casual'],
       location: 'ACT',
       description: 'Assist clients with daily living activities and provide companionship. Training provided.',
     },
     {
       title: 'Enrolled Nurse',
-      type: 'Casual',
+      types: ['Casual'],
       location: 'NSW',
       description: 'Support registered nurses in delivering care plans and maintaining client health records.',
     },
@@ -89,8 +89,10 @@ const Careers = () => {
                   <div className="flex-1 mb-4 md:mb-0">
                     <h3 className="text-2xl font-bold text-mcn-dark mb-2">{job.title}</h3>
                     <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-                      <span className="bg-mcn-light px-3 py-1 rounded-full">{job.type}</span>
-                      <span className="bg-mcn-light px-3 py-1 rounded-full">{job.location}</span>
+                      {job.types.map((type, index) => (
+                        <span key={index} className="bg-mcn-light text-mcn-primary rounded-full px-3 py-1 text-xs font-medium">{type}</span>
+                      ))}
+                      <span className="bg-mcn-light text-mcn-primary rounded-full px-3 py-1 text-xs font-medium">{job.location}</span>
                     </div>
                     <p className="text-gray-600 leading-relaxed">{job.description}</p>
                   </div>
@@ -118,7 +120,7 @@ const Careers = () => {
               <div className="flex justify-between items-center mb-8">
                 <div>
                   <h2 className="text-3xl font-bold text-mcn-dark mb-2">Apply for {selectedJob?.title}</h2>
-                  <p className="text-gray-600">{selectedJob?.type} • {selectedJob?.location}</p>
+                  <p className="text-gray-600">{selectedJob?.types.join(', ')} • {selectedJob?.location}</p>
                 </div>
                 <button
                   onClick={() => setShowModal(false)}

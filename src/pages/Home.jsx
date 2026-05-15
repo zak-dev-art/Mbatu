@@ -70,6 +70,13 @@ const Home = () => {
               <h3 className="text-2xl font-bold mb-4 text-mcn-dark">Community approach</h3>
               <p className="text-gray-600 leading-relaxed">We believe in building strong community connections and supporting local engagement.</p>
             </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="w-20 h-20 bg-gradient-to-br from-mcn-primary to-mcn-secondary rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+                <span className="text-white text-3xl">💰</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-mcn-dark">NDIS and Private Support</h3>
+              <p className="text-gray-600 leading-relaxed">We support both NDIS funded and privately funded participants. Contact us to discuss your options regardless of your funding situation.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -126,8 +133,8 @@ const Home = () => {
       <section ref={galleryRef} className={`py-20 bg-gradient-to-br from-gray-50 to-white transition-all duration-1000 ${galleryInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-mcn-dark mb-4">Our Work</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">See the compassionate care we provide in our community</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-mcn-dark mb-4">Our Community</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Mbatu Care is passionate about community involvement and giving back through supporting local events and programs that create positive opportunities for young people.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">

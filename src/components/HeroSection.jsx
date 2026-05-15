@@ -16,13 +16,15 @@ const HeroSection = () => {
     >
       <div 
         className="absolute inset-0" 
-        style={{ background: 'linear-gradient(to right, rgba(13,43,78,0.75) 40%, rgba(13,43,78,0.35) 100%)' }} 
+        style={{ 
+          background: 'linear-gradient(135deg, rgba(13,43,78,0.85) 0%, rgba(13,43,78,0.65) 50%, rgba(13,43,78,0.45) 100%)' 
+        }} 
       />
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-lg" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.5)' }}>
           Compassionate Community Nursing & Disability Support
         </h1>
-        <p className="text-xl md:text-2xl mb-8">
+        <p className="text-xl md:text-2xl mb-8 text-white drop-shadow-md" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
           Your Care, Your Voice
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">

@@ -55,7 +55,7 @@ const Services = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-mcn-dark mb-6">Our Services</h1>
             <div className="w-24 h-1 bg-gradient-to-r from-mcn-primary to-mcn-secondary mx-auto mb-8"></div>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              We provide a comprehensive range of community nursing and disability support services tailored to meet your individual needs.
+              MCN supports both NDIS funded and privately funded participants across all service areas. We provide a comprehensive range of community nursing and disability support services tailored to meet your individual needs.
             </p>
           </div>
 

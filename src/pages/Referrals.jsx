@@ -34,8 +34,7 @@ const Referrals = () => {
         organisation: data.organisation || '',
         role: data.role || '',
         participant_name: data.participantName || '',
-        participant_dob: data.participantDOB || '',
-        ndis_number: data.ndisNumber || '',
+        age: data.age || '',
         phone: data.contactNumber || '',
         email: data.email || '',
         services: Array.isArray(data.services) ? data.services.join(', ') : data.services || '',
@@ -67,7 +66,7 @@ const Referrals = () => {
         lastname: data.lastName || '',
         email: data.email || '',
         phone: data.phone || '',
-        ndis_number: data.ndisNumber || '',
+        age: data.age || '',
         services: Array.isArray(data.services) ? data.services.join(', ') : data.services || '',
         message: data.notes || '',
       });
@@ -174,18 +173,13 @@ const Referrals = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Participant DOB</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Age (optional)</label>
                   <input
-                    type="date"
-                    {...professionalForm.register('participantDOB', { required: 'Date of birth is required' })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mcn"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">NDIS Number</label>
-                  <input
-                    {...professionalForm.register('ndisNumber')}
+                    type="number"
+                    {...professionalForm.register('age')}
+                    min="0"
+                    max="120"
+                    placeholder="e.g. 45"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mcn"
                   />
                 </div>
@@ -330,24 +324,16 @@ const Referrals = () => {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-mcn-dark mb-2">Date of Birth *</label>
-                      <input
-                        type="date"
-                        {...selfForm.register('dateOfBirth', { required: 'Date of birth is required' })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-mcn-dark mb-2">NDIS Number (Optional)</label>
-                      <input
-                        {...selfForm.register('ndisNumber')}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
-                        placeholder="Enter NDIS number"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Age (optional)</label>
+                    <input
+                      type="number"
+                      {...selfForm.register('age')}
+                      min="0"
+                      max="120"
+                      placeholder="e.g. 45"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
+                    />
                   </div>
 
                   <div>

@@ -28,7 +28,7 @@ const About = () => {
           </div>
           <div className="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100">
             <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-              Mbatu Care Nursing (MCN) is a dedicated community nursing and disability support provider serving the ACT and NSW regions of Australia. We are committed to delivering compassionate, person-centred care that empowers individuals to live their best lives.
+              Mbatu Care Nursing (MCN) Community Nursing and Disability PTY Ltd is a dedicated community nursing and disability support provider serving the ACT and NSW regions of Australia. We are committed to delivering compassionate, person-centred care that empowers individuals to live their best lives. We support both NDIS funded and privately funded participants, ensuring quality care is accessible regardless of funding situation.
             </p>
             <p className="text-xl text-gray-700 mb-8 leading-relaxed">
               Our team of qualified healthcare professionals brings years of experience in community nursing, disability support, and aged care. We understand that every person has unique needs, and we tailor our services accordingly.
@@ -99,6 +99,24 @@ const About = () => {
       <section ref={acknowledgementRef} className={`py-20 bg-gradient-to-br from-mcn-dark to-mcn-primary text-white transition-all duration-1000 ${acknowledgementInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="max-w-4xl mx-auto px-6 md:px-16 lg:px-24 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">Acknowledgement of Country</h2>
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="flex flex-col items-center gap-2">
+              <span style={{ fontSize: '64px', lineHeight: 1 }}>
+                🏴
+              </span>
+              <span className="text-sm font-medium text-mcn-muted">
+                Aboriginal Flag
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <span style={{ fontSize: '64px', lineHeight: 1 }}>
+                🏳️
+              </span>
+              <span className="text-sm font-medium text-mcn-muted">
+                Torres Strait Islander Flag
+              </span>
+            </div>
+          </div>
           <p className="text-xl mb-8 leading-relaxed">
             We acknowledge the Traditional Custodians of the land on which we work, the Ngunnawal people of the ACT and the various Aboriginal and Torres Strait Islander peoples across NSW. We pay our respects to Elders past, present, and emerging.
           </p>
