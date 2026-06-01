@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { submitCareers } from '../services/hubspot';
+import useHubspotForm from '../hooks/useHubspotForm'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -13,11 +12,6 @@ const Careers = () => {
 
   const [selectedJob, setSelectedJob] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const applicationForm = useForm();
-
   const [careersRef, careersInView] = useInView();
 
   const jobs = [
@@ -41,32 +35,19 @@ const Careers = () => {
     },
   ];
 
-  const onApplicationSubmit = async (data) => {
-    setIsSubmitting(true);
-    setSubmitError('');
-    setSubmitSuccess(false);
-
-    try {
-      await submitCareers({
-        firstname: data.firstname || data.fullName?.split(' ')[0] || '',
-        lastname: data.lastname || data.fullName?.split(' ')[1] || '',
-        email: data.email || '',
-        phone: data.phone || '',
-        role: data.role || selectedJob?.title || '',
-        cover_letter: data.coverLetter || '',
-      });
-      setSubmitSuccess(true);
-      setShowModal(false);
-      applicationForm.reset();
-    } catch (error) {
-      console.error('Careers form error:', error);
-      setSubmitError(
-        'Application failed to send. Please try again or email us directly.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  function HubSpotCareersForm() {
+    useHubspotForm({
+      portalId: import.meta.env.VITE_HUBSPOT_PORTAL_ID,
+      formId: import.meta.env.VITE_HUBSPOT_CAREERS_FORM_ID,
+      targetId: 'hubspot-careers-form'
+    })
+    return (
+      <div 
+        id="hubspot-careers-form"
+        className="hubspot-form-wrapper min-h-64"
+      />
+    )
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -130,84 +111,9 @@ const Careers = () => {
                 </button>
               </div>
 
-              <form onSubmit={applicationForm.handleSubmit(onApplicationSubmit)} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Full Name *</label>
-                    <input
-                      {...applicationForm.register('fullName', { required: 'Full name is required' })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Email *</label>
-                    <input
-                      type="email"
-                      {...applicationForm.register('email', { required: 'Email is required' })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Phone *</label>
-                    <input
-                      {...applicationForm.register('phone', { required: 'Phone is required' })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Role Applying For</label>
-                    <input
-                      value={selectedJob?.title}
-                      readOnly
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-mcn-dark mb-2">CV/Resume *</label>
-                  <input
-                    type="file"
-                    {...applicationForm.register('cv', { required: 'CV/Resume is required' })}
-                    accept=".pdf,.doc,.docx"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-l-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-mcn-dark mb-2">Cover Letter</label>
-                  <textarea
-                    {...applicationForm.register('coverLetter')}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all resize-none"
-                    placeholder="Tell us why you're interested in this role..."
-                  />
-                </div>
-
-                <div className="flex space-x-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                    className="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-xl hover:bg-gray-300 transition-colors font-semibold"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 bg-gradient-to-r from-mcn-primary to-mcn-secondary text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                  >
-                    Submit Application
-                  </button>
-                </div>
-              </form>
+              <div className="p-4">
+                <HubSpotCareersForm />
+              </div>
             </div>
           </div>
         </div>

@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
-import { submitContact } from '../services/hubspot';
+import useHubspotForm from '../hooks/useHubspotForm'
 import useInView from '../hooks/useInView';
 
 const Contact = () => {
@@ -11,37 +10,21 @@ const Contact = () => {
     document.title = 'Contact Us - Mbatu Care Nursing';
   }, []);
 
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const contactForm = useForm();
-
   const [contactRef, contactInView] = useInView();
 
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-    setSubmitError('');
-    setSubmitSuccess(false);
-
-    try {
-      await submitContact({
-        firstname: data.name?.split(' ')[0] || data.firstname || '',
-        lastname: data.name?.split(' ')[1] || data.lastname || '',
-        email: data.email || '',
-        phone: data.phone || '',
-        message: data.message || '',
-      });
-      setSubmitSuccess(true);
-      contactForm.reset();
-    } catch (error) {
-      console.error('Contact form error:', error);
-      setSubmitError(
-        'Message failed to send. Please try again or reach us on WhatsApp.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  function HubSpotContactForm() {
+    useHubspotForm({
+      portalId: import.meta.env.VITE_HUBSPOT_PORTAL_ID,
+      formId: import.meta.env.VITE_HUBSPOT_CONTACT_FORM_ID,
+      targetId: 'hubspot-contact-page-form'
+    })
+    return (
+      <div 
+        id="hubspot-contact-page-form"
+        className="hubspot-form-wrapper min-h-64"
+      />
+    )
+  }
 
   return (
     <div className="min-h-screen bg-white">

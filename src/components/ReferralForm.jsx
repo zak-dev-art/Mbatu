@@ -1,54 +1,19 @@
-import { useForm } from 'react-hook-form';
-import { submitReferral } from '../services/hubspot';
+import useHubspotForm from '../hooks/useHubspotForm'
 
 const ReferralForm = ({ type }) => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const formId = type === 'professional'
+    ? import.meta.env.VITE_HUBSPOT_REFERRAL_FORM_ID
+    : import.meta.env.VITE_HUBSPOT_CONTACT_FORM_ID
 
-  const onSubmit = async (data) => {
-    try {
-      await submitReferral(data);
-      alert(`${type} referral submitted successfully!`);
-      reset();
-    } catch (error) {
-      alert('Failed to submit referral. Please try again.');
-    }
-  };
+  const targetId = type === 'professional' ? 'hubspot-referral-form-component' : 'hubspot-contact-form-component'
 
-  if (type === 'professional') {
-    return (
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Referrer Name</label>
-          <input
-            {...register('referrerName', { required: 'Referrer name is required' })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mcn"
-          />
-          {errors.referrerName && <p className="text-red-500 text-sm mt-1">{errors.referrerName.message}</p>}
-        </div>
-        {/* Add other professional fields */}
-        <button type="submit" className="w-full bg-mcn text-white py-3 px-4 rounded-md hover:bg-opacity-90 transition-colors">
-          Submit Professional Referral
-        </button>
-      </form>
-    );
-  }
+  useHubspotForm({
+    portalId: import.meta.env.VITE_HUBSPOT_PORTAL_ID,
+    formId,
+    targetId
+  })
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-        <input
-          {...register('firstName', { required: 'First name is required' })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-mcn"
-        />
-        {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>}
-      </div>
-      {/* Add other self referral fields */}
-      <button type="submit" className="w-full bg-mcn text-white py-3 px-4 rounded-md hover:bg-opacity-90 transition-colors">
-        Submit Self Referral
-      </button>
-    </form>
-  );
-};
+  return <div id={targetId} className="hubspot-form-wrapper min-h-64" />
+}
 
 export default ReferralForm;
