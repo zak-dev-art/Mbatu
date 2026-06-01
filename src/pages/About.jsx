@@ -1,7 +1,4 @@
 import { useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 import TeamCard from '../components/TeamCard';
 import useInView from '../hooks/useInView';
 
@@ -17,7 +14,6 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
 
       {/* Who We Are */}
       <section ref={whoWeAreRef} className={`py-20 bg-gradient-to-br from-gray-50 to-white transition-all duration-1000 ${whoWeAreInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -125,9 +121,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

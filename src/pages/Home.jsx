@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 import useInView from '../hooks/useInView';
 
 const Home = () => {
@@ -18,7 +15,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
       <HeroSection />
       {/* Why Choose MCN Section */}
       <section ref={whyChooseRef} className={`py-20 bg-gradient-to-br from-gray-50 to-white transition-all duration-1000 ${whyChooseInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -169,9 +165,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

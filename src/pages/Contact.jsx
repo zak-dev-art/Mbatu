@@ -1,7 +1,4 @@
 import { useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 import useHubspotForm from '../hooks/useHubspotForm'
 import useInView from '../hooks/useInView';
 
@@ -28,7 +25,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
 
       <section ref={contactRef} className={`py-20 bg-gradient-to-br from-gray-50 to-white transition-all duration-1000 ${contactInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
@@ -250,9 +246,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

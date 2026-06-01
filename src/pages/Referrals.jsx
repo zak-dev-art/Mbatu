@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 import useInView from '../hooks/useInView';
 import useHubspotForm from '../hooks/useHubspotForm'
 
@@ -16,7 +13,6 @@ const Referrals = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
 
       <section ref={referralsRef} className={`py-20 bg-gradient-to-br from-gray-50 to-white transition-all duration-1000 ${referralsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
@@ -123,9 +119,6 @@ const Referrals = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-      <WhatsAppButton />
     </div>
   );
 };
