@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import useHubspotForm from '../hooks/useHubspotForm'
 import useInView from '../hooks/useInView';
 
@@ -8,6 +9,15 @@ const Contact = () => {
   }, []);
 
   const [contactRef, contactInView] = useInView();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm();
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function HubSpotContactForm() {
     useHubspotForm({
@@ -22,6 +32,22 @@ const Contact = () => {
       />
     )
   }
+
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    setSubmitError('');
+    try {
+      // Simulate form submission (replace with actual API call if needed)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setSubmitSuccess(true);
+      reset();
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (err) {
+      setSubmitError(err.message || 'Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -158,45 +184,62 @@ const Contact = () => {
                 </div>
                 <h2 className="text-3xl font-bold text-mcn-dark">Send us a Message</h2>
               </div>
-              <form onSubmit={contactForm.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-mcn-dark mb-2">Name *</label>
                     <input
-                      {...contactForm.register('name', { required: 'Name is required' })}
+                      {...register('name', { required: 'Name is required' })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
                       placeholder="Enter your name"
                     />
+                    {errors.name && <p className="text-red-600 text-xs mt-2">{errors.name.message}</p>}
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-mcn-dark mb-2">Email *</label>
                     <input
                       type="email"
-                      {...contactForm.register('email', { required: 'Email is required' })}
+                      {...register('email', { required: 'Email is required' })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
                       placeholder="Enter your email"
+                    />
+                    {errors.email && <p className="text-red-600 text-xs mt-2">{errors.email.message}</p>}
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Phone</label>
+                    <input
+                      {...register('phone')}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-mcn-dark mb-2">Age</label>
+                    <input
+                      type="number"
+                      {...register('age')}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
+                      placeholder="Enter your age"
+                      min="0"
+                      max="150"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-mcn-dark mb-2">Phone</label>
-                  <input
-                    {...contactForm.register('phone')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-
-                <div>
                   <label className="block text-sm font-semibold text-mcn-dark mb-2">Message *</label>
                   <textarea
-                    {...contactForm.register('message', { required: 'Message is required' })}
+                    {...register('message', { required: 'Message is required' })}
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-mcn-primary focus:border-transparent transition-all resize-none"
                     placeholder="How can we help you?"
                   />
+                  {errors.message && <p className="text-red-600 text-xs mt-2">{errors.message.message}</p>}
                 </div>
 
                 {submitSuccess && (
