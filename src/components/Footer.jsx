@@ -146,7 +146,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <div className="space-y-3 text-sm text-white/70">
-              <p>11/2 Napier Close<br />Deakin ACT 2600</p>
+              <p>11/12 Napier Close<br />Deakin ACT 2600</p>
               <div className="flex items-center gap-2 mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                   className="h-4 w-4 text-mcn-secondary" 
